@@ -70,7 +70,7 @@ class SocketClient {
 		return this.ids.length + 1;
 	}
 
-	join(room, now) {
+	join(room) {
 		this.room = room;
 		this.connect("data", socket => {
 			socket.emit("join", room, this.data);
