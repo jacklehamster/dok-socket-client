@@ -58,11 +58,22 @@ class SocketClient {
 		}
 	}
 
-	getSharedData(index) {
+	getSharedDataAt(index) {
 		if (index === 0) {
 			return this.data;
 		}
 		const id = this.ids[index - 1];
+		return this.sharedData[id];
+	}
+
+	getIdAt(index) {
+		if (index === 0) {
+			return this.id;
+		}
+		return this.ids[index - 1];
+	}
+
+	getSharedData(id) {
 		return this.sharedData[id];
 	}
 
@@ -278,6 +289,7 @@ class SocketClient {
 			    socket.on('self-joined', id => {
 			    	console.log("self-joined", id);
 			    	this.id = id;
+			    	this.sharedData[id] = this.data;
 			    });
 
 			    socket.on('left', id => {
